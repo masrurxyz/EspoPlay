@@ -1,0 +1,182 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <style>
+    @font-face {
+  font-family: 'font';
+  src: url('font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+    body {
+    font-family: 'font', sans-serif;
+  background: #1A2130;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.leaderboard {
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.leaderboard h1 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.top-three {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.top-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  color: #fff;
+}
+
+.top-entry img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #6a0dad;
+}
+
+.top-entry .position {
+  position: absolute;
+  top: 55px;
+  background: #fff;
+  border-radius: 50%;
+  color: #000;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.other-entries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.other-entry {
+  display: flex;
+  align-items: center;
+  width: 45%;
+  background: #000000;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: left;
+  color: #fff;
+}
+
+.other-entry img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.other-entry .info {
+  flex: 1;
+}
+
+.other-entry .name {
+  font-weight: bold;
+}
+
+.other-entry .score {
+  color: #ccc;
+}
+
+  </style>
+  <div class="leaderboard">
+    <h1>Leaderboard</h1>
+    <div class="top-three">
+      <div id="first" class="top-entry"></div>
+      <div id="second" class="top-entry"></div>
+      <div id="third" class="top-entry"></div>
+    </div>
+    <div class="other-entries" id="leaderboard-list">
+      <!-- Other entries will be dynamically added here -->
+    </div>
+  </div>
+  
+     <audio autoplay loop>
+        <source src="bg.mp3" type="audio/mpeg">
+        <source src="background-music.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+  <script>
+    const teams = [
+  { name: "Player1", avatar: "user.png", score: "0" },
+  { name: "Player2", avatar: "user.png", score: "0" },
+  { name: "Player3", avatar: "user.png", score: "0" },
+  { name: "Player4", avatar: "user.png", score: "0" },
+  { name: "Player5", avatar: "user.png", score: "0" },
+  { name: "Player6", avatar: "user.png", score: "0" },
+  { name: "Player7", avatar: "user.png", score: "0" },
+  { name: "Player8", avatar: "user.png", score: "0" },
+];
+
+const topThree = document.querySelector(".top-three");
+const leaderboardList = document.getElementById("leaderboard-list");
+
+// Render top three
+teams.slice(0, 3).forEach((team, index) => {
+  const positionDiv = document.getElementById(
+    index === 0 ? "first" : index === 1 ? "second" : "third"
+  );
+
+  positionDiv.innerHTML = `
+    <div class="position">${index + 1}</div>
+    <img src="${team.avatar}" alt="${team.name}">
+    <div>${team.name}</div>
+    <div>${team.score}</div>
+  `;
+});
+
+// Render remaining teams
+teams.slice(3).forEach((team) => {
+  const entryDiv = document.createElement("div");
+  entryDiv.className = "other-entry";
+  entryDiv.innerHTML = `
+    <img src="${team.avatar}" alt="${team.name}">
+    <div class="info">
+      <div class="name">${team.name}</div>
+      <div class="score">${team.score}</div>
+    </div>
+  `;
+  leaderboardList.appendChild(entryDiv);
+});
+
+  </script>
+  
+      <script>
+        // Wait for user interaction to bypass autoplay restrictions
+        document.body.addEventListener('click', function() {
+            const audio = document.querySelector('audio');
+            audio.play();
+        });
+    </script>
+</body>
+</html>

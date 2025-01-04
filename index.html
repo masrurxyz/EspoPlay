@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Main Page</title>
+    <style>
+        @font-face {
+  font-family: 'font';
+  src: url('font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('login.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            font-family: 'font', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        header img {
+            width: 70px; 
+        }
+
+        footer {
+            margin-bottom: 30px;
+        }
+
+        .go-button {
+          font-family: 'font', sans-serif;
+            background: linear-gradient(45deg, #6a0dad, #6a0dad);
+            color: white;
+            border: none;
+            padding: 10px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .go-button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #6a0dad, #6a0dad);
+        }
+
+        .title {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 18px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo"> <!-- Replace with your logo path -->
+    </header>
+
+    <div class="title">
+        it's just a beginning...
+    </div>
+    
+       <audio autoplay loop>
+        <source src="bg.mp3" type="audio/mpeg">
+        <source src="background-music.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <footer>
+        <button class="go-button" onclick="goToNextPage()">Go</button>
+    </footer>
+
+    <script>
+        function goToNextPage() {
+            window.location.href = "main.html";
+        }
+    </script>
+    
+        <script>
+        // Wait for user interaction to bypass autoplay restrictions
+        document.body.addEventListener('click', function() {
+            const audio = document.querySelector('audio');
+            audio.play();
+        });
+    </script>
+</body>
+</html>

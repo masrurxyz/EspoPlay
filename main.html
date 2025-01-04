@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<style>
+  @font-face {
+  font-family: 'font';
+  src: url('font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body{
+  background: #1A2130;
+}
+/* Modal styling */
+.modal {
+  font-family: 'font', sans-serif;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Notification styling */
+.notification {
+  font-family: 'font', sans-serif;
+  position: fixed;
+  top: -50px;
+  left: 50%;
+  font-size: 14px;
+  transform: translateX(-50%);
+  background: #6a0dad;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: top 0.5s;
+  z-index: 1001;
+}
+
+/* Profile card styling */
+.profile-card {
+  font-family: 'font', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 20px;
+  background: #111;
+  color: #fff;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 337px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Profile header styling */
+.profile-header {
+  font-family: 'font', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: gray;
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-info {
+  font-family: 'font', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-name {
+  font-family: 'font', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.seat-badge {
+  font-family: 'font', sans-serif;
+  background: #6a0dad;
+  color: white;
+  padding: 4px px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Profile details styling */
+.profile-id {
+  font-family: 'font', sans-serif;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 10px 0;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.profile-date {
+  font-family: 'font', sans-serif;
+  color: #ccc;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Update button styling */
+.update-button {
+  font-family: 'font', sans-serif;
+  background: #444;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.update-button:hover {
+  background: #555;
+}
+
+/* Responsive styling for mobile devices */
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 15px;
+    width: 95%;
+  }
+
+  .profile-header {
+    font-family: 'font', sans-serif;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  #profile-name {
+    font-size: 1rem;
+  }
+
+  .seat-badge {
+    font-size: 0.8rem;
+    padding: 2px 6px;
+  }
+
+  .profile-id, .profile-date {
+    font-family: 'font', sans-serif;
+    font-size: 0.8rem;
+  }
+
+  .update-button {
+    font-family: 'font', sans-serif;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    padding: 15px;
+    width: 95%;
+  }
+
+  input[type="text"],
+  input[type="file"] {
+    font-family: 'font', sans-serif;
+    width: 90%;
+    font-size: 1rem;
+  }
+
+  #save-profile-btn,
+  #close-modal-btn {
+    font-family: 'font', sans-serif;
+      background: #6a0dad;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+    font-size: 0.9rem;
+  }
+}
+  .button-container1 {
+  font-family: 'font', sans-serif;  
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#actionButton {
+  font-family: 'font', sans-serif;
+  background: #6a0dad;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+#actionButton:hover {
+  background: #6a0dad;
+  transform: scale(1.05);
+}
+
+#actionButton:active {
+  transform: scale(0.95);
+}
+
+#leaderboardButton {
+    font-family: 'font', sans-serif;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#leaderboadButton:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+#leaderboadButton:active {
+    transform: translateY(1px);
+}
+  /* Button styling */
+    .join-room-btn {
+      font-family: 'font', sans-serif;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 27px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s ease-in-out;
+      box-shadow: 0 8px 15px rgba(255, 65, 108, 0.4);
+    }
+
+    .join-room-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 20px rgba(255, 65, 108, 0.6);
+    }
+
+    /* Popup container styling */
+    .popup {
+      font-family: 'font', sans-serif;
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 15px;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    .popup input {
+      font-family: 'font', sans-serif;
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .popup button {
+      font-family: 'font', sans-serif;
+      background: linear-gradient(45deg, #6a0dad, #6a0dad);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .popup button:hover {
+      background: linear-gradient(45deg, #6a0dad, #6a0dad);
+    }
+
+    .popup .copy-box {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Overlay styling */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+</style>
+
+<body>
+  <div id="register-modal" class="modal">
+  <div class="modal-content">
+    <h2 id="modal-title">Complete Your Profile</h2>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <input type="file" id="profile-picture" />
+    <button id="save-profile-btn">Save Profile</button>
+    <button id="close-modal-btn">Cancel</button>
+  </div>
+</div>
+
+<div id="notification" class="notification"></div>
+
+<div id="profile-card" class="profile-card" style="display: none;">
+  <div class="profile-header">
+    <div class="profile-avatar"></div>
+    <div class="profile-info">
+      <p id="profile-name"></p>
+      <span id="profile-seat" class="seat-badge">Basic Gamer</span>
+    </div>
+  </div>
+  <p id="profile-id" class="profile-id"></p>
+  <p id="profile-date" class="profile-date"></p>
+  <button id="update-profile-btn" class="update-button">Update Profile</button>
+</div>
+
+
+   <audio autoplay loop>
+        <source src="bg.mp3" type="audio/mpeg">
+        <source src="background-music.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="button-container1">
+    <button id="actionButton">Free Tournament</button>
+  </div>
+
+<div class="button-container">
+        <button id="leaderboardButton">Leaderboard</button>
+    </div>
+    
+    <!-- Join Room Button -->
+<button class="join-room-btn" id="joinRoomButton">Join Room</button>
+
+<!-- Popup Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Password Popup -->
+<div class="popup" id="popup">
+  <p id="popupMessage">Enter Password:</p>
+  <input type="password" id="passwordInput" placeholder="Enter Password">
+  <button id="submitPassword">Submit</button>
+  <p id="errorMessage" style="color: red; display: none;">Wrong password, please enter the correct one!</p>
+</div>
+
+<!-- Room Details Popup -->
+<div class="popup" id="roomPopup">
+  <p>Copy these details:</p>
+  <div class="copy-box" id="detail1">Room Code: 1234</div>
+  <div class="copy-box" id="detail2">Game Link: example.com/game</div>
+</div>
+<script>
+  // Elements
+const profileCard = document.getElementById("profile-card");
+const profileAvatar = document.querySelector(".profile-avatar");
+const profileName = document.getElementById("profile-name");
+const profileSeat = document.getElementById("profile-seat");
+const profileID = document.getElementById("profile-id");
+const profileDate = document.getElementById("profile-date");
+const registerModal = document.getElementById("register-modal");
+const usernameInput = document.getElementById("username");
+const profilePictureInput = document.getElementById("profile-picture");
+const notification = document.getElementById("notification");
+const modalTitle = document.getElementById("modal-title");
+
+// Close Modal
+document.getElementById("close-modal-btn").addEventListener("click", () => {
+  registerModal.style.display = "none";
+});
+
+// Show Notification
+function showNotification(message) {
+  notification.textContent = message;
+  notification.style.display = "block";
+  notification.style.top = "20px";
+  setTimeout(() => {
+    notification.style.top = "-50px";
+  }, 3000);
+}
+
+// Save Profile
+document.getElementById("save-profile-btn").addEventListener("click", () => {
+  const username = usernameInput.value.trim();
+  const profilePicture = profilePictureInput.files[0];
+
+  if (!username) {
+    showNotification("Please enter a valid name!");
+    return;
+  }
+
+  // Save Profile Data
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const joinDate = localStorage.getItem("joinDate") || new Date().toLocaleDateString();
+    const userID = localStorage.getItem("userID") || Math.random().toString(36).substring(2, 10);
+
+    localStorage.setItem("profileName", username);
+    localStorage.setItem("profileAvatar", e.target.result);
+    localStorage.setItem("joinDate", joinDate);
+    localStorage.setItem("userID", userID);
+    localStorage.setItem("profileCompleted", "true"); // Mark profile as completed
+
+    profileName.textContent = username;
+    profileAvatar.style.backgroundImage = `url(${e.target.result})`;
+    profileDate.textContent = `Joined ${joinDate}`;
+    profileID.textContent = userID;
+
+    registerModal.style.display = "none";
+    profileCard.style.display = "block";
+
+    showNotification("Profile saved successfully!");
+  };
+
+  if (profilePicture) {
+    reader.readAsDataURL(profilePicture);
+  } else {
+    showNotification("Profile picture is required!");
+  }
+});
+
+// Load Profile
+window.addEventListener("load", () => {
+  const savedName = localStorage.getItem("profileName");
+  const savedAvatar = localStorage.getItem("profileAvatar");
+  const joinDate = localStorage.getItem("joinDate");
+  const userID = localStorage.getItem("userID");
+  const profileCompleted = localStorage.getItem("profileCompleted");
+
+  if (profileCompleted === "true") {
+    // Load profile data if completed
+    profileName.textContent = savedName;
+    profileAvatar.style.backgroundImage = `url(${savedAvatar})`;
+    profileDate.textContent = `Joined ${joinDate}`;
+    profileID.textContent = userID;
+    profileCard.style.display = "block";
+  } else {
+    // Show modal if profile is not completed
+    registerModal.style.display = "flex";
+  }
+});
+
+// Update Profile
+document.getElementById("update-profile-btn").addEventListener("click", () => {
+  usernameInput.value = localStorage.getItem("profileName") || "";
+  modalTitle.textContent = "Update Your Profile";
+  registerModal.style.display = "flex";
+});
+
+</script>
+
+    <script>
+        // Wait for user interaction to bypass autoplay restrictions
+        document.body.addEventListener('click', function() {
+            const audio = document.querySelector('audio');
+            audio.play();
+        });
+    </script>
+    
+    <script>
+          document.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("actionButton");
+  const buttonKey = "buttonClicked";
+
+  // Check if the button has been clicked before
+  if (localStorage.getItem(buttonKey)) {
+    button.style.display = "none"; // Hide the button if already clicked
+  }
+
+  button.addEventListener("click", () => {
+    // Redirect to the desired link
+    window.location.href = "https://www.example.com";
+
+    // Save the button click status
+    localStorage.setItem(buttonKey, "true");
+
+    // Hide the button permanently
+    button.style.display = "none";
+  });
+});
+    </script>
+    
+<script>
+  document.getElementById("leaderboardButton").addEventListener("click", function() {
+    window.location.href = "leaderboard.html"; // Replace with your target HTML page
+});
+
+</script>
+
+<script>
+  const joinRoomButton = document.getElementById('joinRoomButton');
+  const overlay = document.getElementById('overlay');
+  const popup = document.getElementById('popup');
+  const roomPopup = document.getElementById('roomPopup');
+  const submitPassword = document.getElementById('submitPassword');
+  const passwordInput = document.getElementById('passwordInput');
+  const errorMessage = document.getElementById('errorMessage');
+  const correctPassword = 'ABCD';
+
+  // Show the first popup
+  joinRoomButton.addEventListener('click', () => {
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+  });
+
+  // Close popups when clicking outside
+  overlay.addEventListener('click', () => {
+    popup.style.display = 'none';
+    roomPopup.style.display = 'none';
+    overlay.style.display = 'none';
+    errorMessage.style.display = 'none';
+    passwordInput.value = '';
+  });
+
+  // Submit password logic
+  submitPassword.addEventListener('click', () => {
+    const enteredPassword = passwordInput.value.trim();
+    if (enteredPassword === correctPassword) {
+      popup.style.display = 'none';
+      roomPopup.style.display = 'block';
+      errorMessage.style.display = 'none';
+    } else {
+      errorMessage.style.display = 'block';
+    }
+  });
+
+  // Copy functionality for room details
+  document.querySelectorAll('.copy-box').forEach(box => {
+    box.addEventListener('click', () => {
+      navigator.clipboard.writeText(box.textContent).then(() => {
+        alert('Copied to clipboard: ' + box.textContent);
+      });
+    });
+  });
+</script>
+</body>
+
+</html>
